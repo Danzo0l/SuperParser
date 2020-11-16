@@ -3,6 +3,7 @@ import json
 
 URL = 'http://dop.edu.ru/organization/list?orientation=3&region=42&page=1&perPage=20'
 PATH = ''
+SYMB = ';' # ',' // '#' // '    '
 # Change 'PATH' value, if you want change file location
 
 KORT = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36',
@@ -19,7 +20,7 @@ def content_maker(document):
     bugai = json.loads(maker)
     for i in range(len(bugai['data']['list'])):
         fale1.write('\n')
-        fale1.write(bugai['data']['list'][i]['name'] + ';' + bugai['data']['list'][i]['full_name'] + ';' + bugai['data']['list'][i]['site_url'])
+        fale1.write(bugai['data']['list'][i]['name'] + SYMB + bugai['data']['list'][i]['full_name'] + SYMB + bugai['data']['list'][i]['site_url'])
 
 def parsing():
     '''Using for parsing html-document'''
@@ -30,6 +31,6 @@ def parsing():
         print('ERROR: no response received from the site')
 
 fale1 = open(PATH+'parsing.csv', 'w', encoding='utf-8')
-fale1.write('name;full_name;website_address')
+fale1.write('name'+SYMB+'full_name'+SYMB+'website_address')
 parsing()
 print('finished!')
