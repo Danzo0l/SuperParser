@@ -1,5 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
 import json
 
 URL = 'http://dop.edu.ru/organization/list?orientation=3&region=42&page=1&perPage=20'
@@ -16,12 +15,11 @@ def getting_document(url, params=None):
 
 def content_maker(document):
     '''Using to form structured content from a html-page'''
-    maker = str(BeautifulSoup(document, 'html.parser'))
+    maker = str(document)
     bugai = json.loads(maker)
     for i in range(len(bugai['data']['list'])):
         fale1.write('\n')
         fale1.write(bugai['data']['list'][i]['name'] + ';' + bugai['data']['list'][i]['full_name'] + ';' + bugai['data']['list'][i]['site_url'])
-
 
 def parsing():
     '''Using for parsing html-document'''
